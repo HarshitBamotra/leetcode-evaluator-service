@@ -2,6 +2,7 @@ import winston from "winston";
 
 const allowedTransports = [];
 
+// Console
 allowedTransports.push(
     new winston.transports.Console({
         format: winston.format.combine(
@@ -17,12 +18,14 @@ allowedTransports.push(
     })
 );
 
+// file
 allowedTransports.push(
     new winston.transports.File({
         filename: `logs/app.log`,
     })
 );
 
+// Default Logger
 const logger = winston.createLogger({
     format: winston.format.combine(
         winston.format.timestamp({
