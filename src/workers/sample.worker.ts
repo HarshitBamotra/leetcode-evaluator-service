@@ -3,7 +3,7 @@ import SampleJob from "../jobs/sample.job";
 import redisConnection from "../config/redis.config";
 
 export default function sampleWorker(queueName: string) {
-    const worker = new Worker(
+    new Worker(
         queueName,
         async (job: Job) => {
             if (job.name === "SampleJob") {

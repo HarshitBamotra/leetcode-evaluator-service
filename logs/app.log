@@ -1,0 +1,26 @@
+2024-10-18 21:05:27 [info]: server started on 3001
+2024-10-18 21:05:27 [info]: New job added
+ SampleJob [object Object]
+2024-10-18 21:07:40 [info]: server started on 3001
+2024-10-18 21:07:40 [info]: New job added
+ SampleJob [object Object]
+2024-10-18 21:07:50 [info]: server started on 3001
+2024-10-18 21:07:50 [info]: New job added
+ SampleJob [object Object]
+2024-10-18 21:16:51 [info]: server started on 3001
+2024-10-18 21:16:51 [info]: New job added
+ SampleJob [object Object]
+2024-10-18 21:20:35 [info]: server started on 3001
+2024-10-18 21:20:35 [info]: New Job Added
+2024-10-18 21:20:52 [info]: server started on 3001
+2024-10-18 21:20:52 [info]: New Job Added { name: 'SampleJob' } { payload: { name: 'Harshit', College: 'Chandigarh University' } }
+2024-10-18 21:21:14 [info]: server started on 3001
+2024-10-18 21:21:14 [info]: New Job Added 'SampleJob' { name: 'Harshit', College: 'Chandigarh University' }
+2024-10-18 21:26:31 [info]: server started on 3001
+2024-10-18 21:26:31 [info]: New job added SampleJob [object Object]
+2024-10-18 21:26:44 [info]: server started on 3001
+2024-10-18 21:26:44 [info]: New job added SampleJob [object Object]
+2024-10-18 21:52:33 [info]: server started on 3001
+2024-10-18 21:52:33 [info]: New job added [object Object]
+2024-10-18 21:53:05 [info]: server started on 3001
+2024-10-18 21:53:05 [info]: New job added [object Object]
