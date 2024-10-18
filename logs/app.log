@@ -24,3 +24,7 @@
 2024-10-18 21:52:33 [info]: New job added [object Object]
 2024-10-18 21:53:05 [info]: server started on 3001
 2024-10-18 21:53:05 [info]: New job added [object Object]
+2024-10-18 21:53:40 [info]: server started on 3001
+2024-10-18 21:53:40 [info]: New job added 'SampleJob' { name: 'Harshit', College: 'Chandigarh University' }
+2024-10-18 22:03:51 [info]: server started on 3001
+2024-10-18 22:03:51 [info]: New job added 'SampleJob' { name: 'Harshit', College: 'Chandigarh University' }

@@ -23,8 +23,6 @@ allowedTransports.push(
     })
 );
 
-// Default Logger
-
 const logger = winston.createLogger({
     format: winston.format.combine(
         winston.format.timestamp({
