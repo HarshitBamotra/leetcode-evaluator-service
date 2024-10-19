@@ -14,7 +14,7 @@ export default [
             "no-unused-vars": ["off"],
             'no-var': 'error',
             'semi': ['error', 'always'],
-            'indent': ['error', 4, { SwitchCase: 4 }],
+            // 'indent': ['error', 4, { SwitchCase: 4 }],
             'no-multi-spaces': 'error',
             'space-in-parens': 'error',
             'no-multiple-empty-lines': 'error',
