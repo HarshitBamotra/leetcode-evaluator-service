@@ -17,6 +17,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@bull-board/api": "^6.2.3",
+    "@bull-board/express": "^6.2.3",
+    "@bull-board/ui": "^6.2.3",
     "@types/ioredis": "^5.0.0",
     "bullmq": "^5.20.0",
     "concurrently": "^9.0.1",
