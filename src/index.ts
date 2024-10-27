@@ -6,6 +6,8 @@ import apiRouter from "./routes";
 import logger from "./config/logger.config";
 import serverAdapter from "./config/bullboard.config";
 import runPython from "./containers/runPythonDocker";
+import runJava from "./containers/runJavaDocker";
+import runCpp from "./containers/runCppContainer";
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -23,11 +25,20 @@ app.listen(serverConfig.PORT, () => {
     );
 
     const code = `
-x = input()
-print("value of x: ", x)
-y = input()
-print("value of y: ", y)
-    `;
+        #include<iostream>
+        using namespace std;
 
-    runPython(code, "100\n200");
+        int main(){
+            int x;
+            cin>>x;
+            cout<<"value of x is: "<<x;
+            for(int i=0; i<x; i++){
+                cout<<i<<"\\\\n";
+            }
+            cout<<endl;
+        }
+    `;
+    runCpp(code, "10");
+    // runJava(code, "100");
+    // runPython(code, "100\n200");
 });

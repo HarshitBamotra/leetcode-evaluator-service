@@ -1,29 +1,29 @@
 import Docker from "dockerode";
 import { TestCases } from "../types/testCases";
 import createContainer from "./containerFactory";
-import { PYTHON_IMAGE } from "../utils/constants";
+import { CPP_IMAGE } from "../utils/constants";
 import logger from "../config/logger.config";
 import decodeDockerStream from "./docker.helper";
 import pullImage from "./pullimage";
 
-async function runPython(code: string, inputTestCase: string) {
-    pullImage(PYTHON_IMAGE);
+async function runCpp(code: string, inputTestCase: string) {
+    await pullImage(CPP_IMAGE);
 
     const rawLogBuffer: Buffer[] = [];
+    console.log(code);
 
-    const runCommand = `echo '${code.replace(/'/g, `'\\"`)}' > test.py && echo '${inputTestCase}' | python3 test.py`;
-    console.log(runCommand);
+    const runCommand = `echo '${code.replace(/'/g, `'\\"`)}' > main.cpp && g++ main.cpp -o main && echo '${inputTestCase}' | ./main`;
 
-    const pythonContainer = await createContainer(PYTHON_IMAGE, [
+    const cppContainer = await createContainer(CPP_IMAGE, [
         "/bin/sh",
         "-c",
         runCommand,
     ]);
 
-    await pythonContainer.start();
+    await cppContainer.start();
     logger.info("started the conatiner");
 
-    const loggerStream = await pythonContainer.logs({
+    const loggerStream = await cppContainer.logs({
         stdout: true,
         stderr: true,
         timestamps: false,
@@ -39,10 +39,11 @@ async function runPython(code: string, inputTestCase: string) {
             const completeBuffer = Buffer.concat(rawLogBuffer);
             const decodedStream = decodeDockerStream(completeBuffer);
             console.log(decodedStream);
+            console.log(decodedStream.stdout);
             res(decodedStream);
         });
     });
 
-    await pythonContainer.remove();
+    await cppContainer.remove();
 }
-export default runPython;
+export default runCpp;
