@@ -1,8 +1,9 @@
 import Docker from "dockerode";
+import serverConfig from "../config/server.config";
 
 export default async function pullImage(imagename: string) {
     try {
-        const docker = new Docker();
+        const docker = new Docker({ socketPath: serverConfig.DOCKER_SOCKET_PATH });
         return new Promise((res, rej) => {
             docker.pull(imagename, (err: Error, stream: NodeJS.ReadStream) => {
                 if (err) {

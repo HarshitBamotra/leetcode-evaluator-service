@@ -27,7 +27,7 @@ async function runCpp(code: string, inputTestCase: string) {
         stdout: true,
         stderr: true,
         timestamps: false,
-        follow: true,
+        follow: true
     });
 
     loggerStream.on("data", (chunk) => {
