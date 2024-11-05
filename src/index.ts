@@ -8,6 +8,9 @@ import serverAdapter from "./config/bullboard.config";
 import runPython from "./containers/runPythonDocker";
 import runJava from "./containers/runJavaDocker";
 import runCpp from "./containers/runCppContainer";
+import submissionWorker from "./workers/submission.worker";
+import { submission_queue } from "./utils/constants";
+import submissionProducer from "./producers/submission.producer";
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,10 +23,11 @@ app.use("/admin/queues", serverAdapter.getRouter());
 
 app.listen(serverConfig.PORT, () => {
     logger.info(`server started on ${serverConfig.PORT}`);
-    logger.info(
-        `Bullboard dashboard running on http://localhost:${serverConfig.PORT}/admin/queues`
-    );
+    logger.info(`Bullboard dashboard running on http://localhost:${serverConfig.PORT}/admin/queues`);
 
+    submissionWorker(submission_queue);
+    
+    
     const code = `
         #include<iostream>
         using namespace std;
@@ -31,14 +35,20 @@ app.listen(serverConfig.PORT, () => {
         int main(){
             int x;
             cin>>x;
-            cout<<"value of x is: "<<x;
+            cout<<"value of x is: "<<x<<endl;
             for(int i=0; i<x; i++){
                 cout<<i<<"\\\\n";
             }
             cout<<endl;
         }
     `;
-    runCpp(code, "10");
+    const inputCase = "10";
+    submissionProducer({"1234":{
+        language:"CPP",
+        code,
+        inputCase
+    }});
+    // runCpp(code, "10");
     // runJava(code, "100");
     // runPython(code, "100\n200");
 });
