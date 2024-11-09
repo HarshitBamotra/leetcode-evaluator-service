@@ -32,3 +32,21 @@ export default function decodeDockerStream(buffer: Buffer): DockerStreamOutput {
     }
     return output;
 }
+
+export async function fetchDecodedStream(loggerStream: NodeJS.ReadableStream, rawLogBuffer: Buffer[]): Promise<string>{
+    return new Promise((res, rej) => {
+        loggerStream.on("end", () => {
+            // console.log(rawLogBuffer);
+            const completeBuffer = Buffer.concat(rawLogBuffer);
+            const decodedStream = decodeDockerStream(completeBuffer);
+            console.log(decodedStream);
+            
+            if(decodedStream.stderr){
+                rej(decodedStream.stderr);
+            }
+            else{
+                res(decodedStream.stdout);
+            }
+        });
+    });
+}

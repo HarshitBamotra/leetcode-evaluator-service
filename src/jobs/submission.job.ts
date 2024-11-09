@@ -2,7 +2,9 @@ import { Job } from "bullmq";
 import { IJob } from "../types/bullMqJobDefinition";
 import logger from "../config/logger.config";
 import { SubmissionPayload } from "../types/submissionPayload";
-import runCpp from "../containers/runCppContainer";
+import runCpp from "../containers/cppExecutor";
+import createExecutor from "../utils/ExecutorFactory";
+import { ExecutionResponse } from "../types/CodeExecutorStrategy";
 
 export default class SubmissionJob implements IJob {
     name: string;
@@ -16,12 +18,28 @@ export default class SubmissionJob implements IJob {
     handler = async (job?: Job) => {
         if (job) {
             const key = Object.keys(this.payload)[0];
-            if(this.payload[key].language === "CPP"){
-                const response = await runCpp(this.payload[key].code, this.payload[key].inputCase);
-                console.log("Evaluated response is: ", response);
-            }
-            if(this.payload[key].language === "Java"){
+            const codeLanguage = this.payload[key].language;
+            const code = this.payload[key].code;
+            const input = this.payload[key].inputCase;
+            // if(codeLanguage === "CPP"){
+            //     const response = await runCpp(this.payload[key].code, this.payload[key].inputCase);
+            //     console.log("Evaluated response is: ", response);
+            // }
+            // if(this.payload[key].language === "Java"){
 
+            // }
+
+            const strategy = createExecutor(codeLanguage);
+            if(strategy !== null){
+                const response : ExecutionResponse = await strategy.execute(code, input);
+                if(response.status === "COMPLETED"){
+                    console.log("code executed successfully");
+                    console.log(response);
+                }
+                else{
+                    console.log("something went wrong");
+                    console.log(response);
+                }
             }
         }
     };

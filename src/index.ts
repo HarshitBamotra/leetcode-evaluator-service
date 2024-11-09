@@ -5,9 +5,9 @@ import apiRouter from "./routes";
 
 import logger from "./config/logger.config";
 import serverAdapter from "./config/bullboard.config";
-import runPython from "./containers/runPythonDocker";
-import runJava from "./containers/runJavaDocker";
-import runCpp from "./containers/runCppContainer";
+import runPython from "./containers/pythonExecutor";
+import runJava from "./containers/JavaExecutor";
+import runCpp from "./containers/cppExecutor";
 import submissionWorker from "./workers/submission.worker";
 import { submission_queue } from "./utils/constants";
 import submissionProducer from "./producers/submission.producer";
