@@ -9,7 +9,7 @@ import CodeExecutorStrategy, { ExecutionResponse } from "../types/CodeExecutorSt
 
 
 class CppExecutor implements CodeExecutorStrategy{
-    async execute(code: string, input: string): Promise<ExecutionResponse> {
+    async execute(code: string, input: string, output: string): Promise<ExecutionResponse> {
         await pullImage(CPP_IMAGE);
 
         const rawLogBuffer: Buffer[] = [];
@@ -39,10 +39,10 @@ class CppExecutor implements CodeExecutorStrategy{
 
         try {
             const codeResponse : string = await fetchDecodedStream(loggerStream, rawLogBuffer);
-            return {output: codeResponse, status: "Completed"}
+            return {output: codeResponse, status: "completed"};
 
         } catch (error) {
-            return {output: error as string, status: "Error"}
+            return {output: error as string, status: "error"};
         }
         finally{
             await cppContainer.remove();

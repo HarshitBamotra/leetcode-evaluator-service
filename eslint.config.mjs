@@ -13,7 +13,7 @@ export default [
             '@typescript-eslint/no-unused-vars': 'off',
             "no-unused-vars": ["off"],
             'no-var': 'error',
-            'semi': ['error', 'always'],
+            // 'semi': ['error', 'always'],
             // 'indent': ['error', 4, { SwitchCase: 4 }],
             'no-multi-spaces': 'error',
             'space-in-parens': 'error',

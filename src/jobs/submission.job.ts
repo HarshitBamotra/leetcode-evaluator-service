@@ -16,12 +16,15 @@ export default class SubmissionJob implements IJob {
     }
 
     handler = async (job?: Job) => {
+        console.log("JOB HANDLER CALLED");
+        // console.log(job);
         if (job) {
             const key = Object.keys(this.payload)[0];
             const codeLanguage = this.payload[key].language;
             const code = this.payload[key].code;
             const input = this.payload[key].inputCase;
-            // if(codeLanguage === "CPP"){
+            const output = this.payload[key].outputCase;
+            // if(codeLanguage === "C_CPP"){
             //     const response = await runCpp(this.payload[key].code, this.payload[key].inputCase);
             //     console.log("Evaluated response is: ", response);
             // }
@@ -31,8 +34,8 @@ export default class SubmissionJob implements IJob {
 
             const strategy = createExecutor(codeLanguage);
             if(strategy !== null){
-                const response : ExecutionResponse = await strategy.execute(code, input);
-                if(response.status === "COMPLETED"){
+                const response : ExecutionResponse = await strategy.execute(code, input, output);
+                if(response.status.toLowerCase() === "completed"){
                     console.log("code executed successfully");
                     console.log(response);
                 }

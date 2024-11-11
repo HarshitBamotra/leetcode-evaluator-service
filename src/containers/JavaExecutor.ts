@@ -9,7 +9,7 @@ import CodeExecutorStrategy, { ExecutionResponse } from "../types/CodeExecutorSt
 
 
 class JavaExecutor implements CodeExecutorStrategy{
-    async execute(code: string, input: string): Promise<ExecutionResponse> {
+    async execute(code: string, input: string, output: string): Promise<ExecutionResponse> {
         await pullImage(JAVA_IMAGE);
 
         const rawLogBuffer: Buffer[] = [];
@@ -39,10 +39,10 @@ class JavaExecutor implements CodeExecutorStrategy{
 
         try {
             const codeResponse : string = await fetchDecodedStream(loggerStream, rawLogBuffer);
-            return {output: codeResponse, status: "COMPLETED"}
+            return {output: codeResponse, status: "COMPLETED"};
 
         } catch (error) {
-            return {output: error as string, status: "ERROR"}
+            return {output: error as string, status: "ERROR"};
         }
         finally{
             await javaContainer.remove();

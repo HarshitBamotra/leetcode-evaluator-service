@@ -28,26 +28,26 @@ app.listen(serverConfig.PORT, () => {
     submissionWorker(submission_queue);
     
     
-    const code = `
-        #include<iostream>
-        using namespace std;
+    // const code = `
+    //     #include<iostream>
+    //     using namespace std;
 
-        int main(){
-            int x;
-            cin>>x;
-            cout<<"value of x is: "<<x<<endl;
-            for(int i=0; i<x; i++){
-                cout<<i<<"\\\\n";
-            }
-            cout<<endl;
-        }
-    `;
-    const inputCase = "10";
-    submissionProducer({"1234":{
-        language:"CPP",
-        code,
-        inputCase
-    }});
+    //     int main(){
+    //         int x;
+    //         cin>>x;
+    //         cout<<"value of x is: "<<x<<endl;
+    //         for(int i=0; i<x; i++){
+    //             cout<<i<<"\\\\n";
+    //         }
+    //         cout<<endl;
+    //     }
+    // `;
+    // const inputCase = "10";
+    // submissionProducer({"1234":{
+    //     language:"C_CPP",
+    //     code,
+    //     inputCase
+    // }});
     // runCpp(code, "10");
     // runJava(code, "100");
     // runPython(code, "100\n200");
