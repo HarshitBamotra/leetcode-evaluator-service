@@ -39,9 +39,19 @@ class CppExecutor implements CodeExecutorStrategy{
 
         try {
             const codeResponse : string = await fetchDecodedStream(loggerStream, rawLogBuffer);
-            return {output: codeResponse, status: "completed"};
+
+            if(codeResponse.trim() === output.trim()){
+                return {output: codeResponse, status: "success"};    
+            }
+            else{
+                return {output: codeResponse, status: "wa"};
+            }
 
         } catch (error) {
+            console.log(error);
+            if(error === "TLE"){
+                await cppContainer.kill();
+            }
             return {output: error as string, status: "error"};
         }
         finally{

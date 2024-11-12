@@ -39,10 +39,20 @@ class JavaExecutor implements CodeExecutorStrategy{
 
         try {
             const codeResponse : string = await fetchDecodedStream(loggerStream, rawLogBuffer);
-            return {output: codeResponse, status: "COMPLETED"};
+
+            if(codeResponse.trim() === output.trim()){
+                return {output: codeResponse, status: "success"};    
+            }
+            else{
+                return {output: codeResponse, status: "wa"};
+            }
 
         } catch (error) {
-            return {output: error as string, status: "ERROR"};
+            console.log(error);
+            if(error === "TLE"){
+                await javaContainer.kill();
+            }
+            return {output: error as string, status: "error"};
         }
         finally{
             await javaContainer.remove();
