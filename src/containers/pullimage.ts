@@ -14,6 +14,8 @@ export default async function pullImage(imagename: string) {
                         rej(err);
                     }
                     res(response);
+                }, (event)=>{
+                    console.log(event);
                 });
             });
         });

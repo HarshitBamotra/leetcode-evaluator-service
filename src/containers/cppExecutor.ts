@@ -39,7 +39,7 @@ class CppExecutor implements CodeExecutorStrategy{
 
         try {
             const codeResponse : string = await fetchDecodedStream(loggerStream, rawLogBuffer);
-
+            console.log(codeResponse);
             if(codeResponse.trim() === output.trim()){
                 return {output: codeResponse, status: "success"};    
             }

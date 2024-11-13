@@ -42,7 +42,7 @@ export async function fetchDecodedStream(loggerStream: NodeJS.ReadableStream, ra
             console.log("timeout called");
             rej("TLE");
             
-        }, 2000);
+        }, 10000);
         loggerStream.on("end", () => {
             clearTimeout(timeout);
             // console.log(rawLogBuffer);
